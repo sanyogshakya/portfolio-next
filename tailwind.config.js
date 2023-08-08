@@ -12,6 +12,11 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      gap: {
+        20: "5rem",
+        22: "5.5rem",
+        24: "6rem",
+      },
     },
     colors: {
       transparent: "transparent",

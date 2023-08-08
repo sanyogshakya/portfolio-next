@@ -1,3 +1,3 @@
 export const TwoColumnPageWrapper = ({ children }) => {
-  return <div className="flex gap-5 lg:gap-10">{children}</div>;
+  return <div className="flex gap-10 lg:gap-24">{children}</div>;
 };

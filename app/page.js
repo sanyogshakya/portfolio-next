@@ -1,9 +1,4 @@
-// import { BlockRenderer } from "@/components/BlockRenderer";
-// import { TwoColumnPageWrapper } from "@/components/TwoColumnPageWrapper";
 import { cleanAndTransformBlocks } from "@/utils/cleanAndTransformBlocks";
-// import Image from "next/image";
-// import Link from "next/link";
-// import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 import { Manrope, Archivo } from "next/font/google";
 import { ClientComponent } from "@/components/ClientComponent/ClientComponent";
@@ -29,6 +24,42 @@ export default async function Home() {
             blocks
           }
         }
+        themeSettings {
+          themeSettings {
+            description
+            pageNavigation {
+              sectionId
+              sectionTitle
+            }
+            socialHandles {
+              github {
+                handle
+                link {
+                  target
+                  url
+                }
+              }
+              instagram {
+                handle
+                link {
+                  target
+                  url
+                }
+              }
+              linkedin {
+                handle
+                link {
+                  target
+                  url
+                }
+              }
+            }
+          }
+        }
+        allSettings {
+          generalSettingsTitle
+          generalSettingsDescription
+        }
       }`,
     }),
     headers: {
@@ -36,10 +67,18 @@ export default async function Home() {
     },
   }).then((res) => res.json());
   const blocks = cleanAndTransformBlocks(content.data.nodeByUri.blocks);
+  const themeSettings = content.data.themeSettings.themeSettings;
+  const siteTitle = content.data.allSettings.generalSettingsTitle;
+  const siteDescription = content.data.allSettings.generalSettingsDescription;
 
   return (
     <div className="relative container mx-auto px-5 lg:px-16 xl:px-[10rem]">
-      <ClientComponent blocks={blocks} />
+      <ClientComponent
+        blocks={blocks}
+        themeSettings={themeSettings}
+        siteTitle={siteTitle}
+        siteDescription={siteDescription}
+      />
     </div>
   );
 }

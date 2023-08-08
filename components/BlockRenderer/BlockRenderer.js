@@ -1,6 +1,9 @@
 import { Heading } from "components/Heading";
 import { Paragraph } from "components/Paragraph";
-// import { PostTitle } from "components/PostTitle";
+import { TitleWithDescription } from "../TitleWithDescription";
+import { Experience } from "../Experience";
+import { ProjectsShowcase } from "../ProjectsShowcase";
+import { ContactForm } from "../ContactForm";
 
 export const BlockRenderer = ({ blocks }) => {
   return blocks.map((block) => {
@@ -24,15 +27,20 @@ export const BlockRenderer = ({ blocks }) => {
           />
         );
       }
-      // case "core/post-title": {
-      //   return (
-      //     <PostTitle
-      //       key={block.id}
-      //       level={block.attributes.level}
-      //       textAlign={block.attributes.textAlign}
-      //     />
-      //   );
-      // }
+      case "acf/sanyog-title-with-description": {
+        return (
+          <TitleWithDescription key={block.id} data={block.attributes.data} />
+        );
+      }
+      case "acf/sanyog-experience": {
+        return <Experience key={block.id} data={block.attributes.data} />;
+      }
+      case "acf/sanyog-projects-showcase": {
+        return <ProjectsShowcase key={block.id} data={block.attributes.data} />;
+      }
+      case "acf/sanyog-contact-form": {
+        return <ContactForm key={block.id} data={block.attributes.data} />;
+      }
       default: {
         console.log("UNKNOWN: ", block);
         return null;

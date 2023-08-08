@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  @variants responsive {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+  }
+}
+
 html {
   scroll-behavior: smooth !important;
 }
@@ -9,7 +24,7 @@ html {
 :root {
   --clr-background: #b9eaef;
   --clr-foreground: #1d1c1d;
-  --clr-accent: #00bdf9;
+  --clr-accent: #00acff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,7 +32,7 @@ html {
     --clr-background: #1d1c1d;
     --clr-foreground: #b9eaef;
     --clr-foreground: #7a797a;
-    --clr-accent: #00bdf9;
+    --clr-accent: #00acff;
   }
 }
 
@@ -104,10 +119,26 @@ span {
   line-height: inherit;
 }
 
-li.diamond::after {
+li.half-arrow::after {
   content: "\21C0"; /* 27BE	21C0 21C1 */
   position: absolute;
   left: 0;
   top: 0;
   color: var(--clr-accent);
+}
+
+.logo path {
+  stroke-dasharray: 600px;
+  stroke-dashoffset: 600px;
+  transition: stroke-dashoffset 2s linear;
+}
+
+.logo.animate path {
+  stroke-dashoffset: 0px;
+  transition: stroke-dashoffset 2s linear;
+}
+
+/* Experience */
+.experience-item ul li {
+  @apply mb-3 pl-6 half-arrow relative;
 }
