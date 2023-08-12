@@ -142,3 +142,8 @@ li.half-arrow::after {
 .experience-item ul li {
   @apply mb-3 pl-6 half-arrow relative;
 }
+
+.focused label {
+  top: 0.2rem;
+  font-size: 0.8rem;
+}

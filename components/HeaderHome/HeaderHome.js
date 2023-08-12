@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Archivo } from "next/font/google";
 import {
@@ -15,14 +15,60 @@ const archivo = Archivo({
   display: "swap",
 });
 
-export const HeaderHome = ({
-  themeSettings,
-  activeSection,
-  siteTitle,
-  siteDescription,
-}) => {
+export const HeaderHome = ({ themeSettings, siteTitle, siteDescription }) => {
+  const [loading, setLoading] = useState(true);
   const pageNavigation = themeSettings.pageNavigation;
   const socialHandles = themeSettings.socialHandles;
+
+  const [activeSection, setActiveSection] = useState(null);
+  const sections = useRef([]);
+  let idx;
+
+  const handleScroll = () => {
+    const pageYOffset = window.scrollY;
+    let newActiveSection = null;
+
+    sections.current.forEach((section) => {
+      const sectionOffsetTop = section.offsetTop;
+      const sectionHeight = section.offsetHeight;
+
+      if (
+        pageYOffset + 80 >= sectionOffsetTop &&
+        pageYOffset + 80 < sectionOffsetTop + sectionHeight
+      ) {
+        newActiveSection = section.id;
+      }
+    });
+
+    setActiveSection(newActiveSection);
+  };
+
+  const scrollImage = (e) => {
+    const figure = e.target.parentElement;
+    idx = setInterval(() => (figure.scrollTop += 1), 15);
+  };
+
+  const stopScrollImage = () => {
+    clearInterval(idx);
+  };
+
+  const disableScroll = (e) => {
+    e.stopPropagation();
+  };
+
+  useEffect(() => {
+    // To handle section's scroll navigation
+    sections.current = document.querySelectorAll(".section");
+    handleScroll();
+    window.addEventListener("scroll", handleScroll);
+
+    setLoading(false);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [activeSection]);
+
   return (
     <header className="sticky top-0 py-8 max-h-[100vh] lg:py-16 flex-[1_1_20%] 2xl:flex-[1_1_42%]">
       <svg

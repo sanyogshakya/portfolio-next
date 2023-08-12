@@ -1,0 +1,57 @@
+export const getPageData = async () => {
+  const res = await fetch("http://localhost/portfolio/graphql", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      query: `query getPageData {
+        nodeByUri(uri: "/") {
+          ... on Page {
+            blocks
+          }
+        }
+        themeSettings {
+          themeSettings {
+            description
+            pageNavigation {
+              sectionId
+              sectionTitle
+            }
+            socialHandles {
+              github {
+                handle
+                link {
+                  target
+                  url
+                }
+              }
+              instagram {
+                handle
+                link {
+                  target
+                  url
+                }
+              }
+              linkedin {
+                handle
+                link {
+                  target
+                  url
+                }
+              }
+            }
+          }
+        }
+        allSettings {
+          generalSettingsTitle
+          generalSettingsDescription
+        }
+      }`,
+    }),
+  });
+
+  const pageData = await res.json();
+
+  return pageData;
+};

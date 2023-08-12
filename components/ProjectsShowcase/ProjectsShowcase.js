@@ -1,3 +1,4 @@
+"use client";
 import useSWR from "swr";
 import { request } from "graphql-request";
 import Image from "next/image";
