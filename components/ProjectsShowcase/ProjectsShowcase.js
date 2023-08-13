@@ -15,14 +15,6 @@ export const ProjectsShowcase = ({ data }) => {
 
   let upInterval, downInterval;
 
-  const preventDefault = useCallback((e) => {
-    e = e || window.e;
-    if (e.preventDefault) {
-      e.preventDefault();
-    }
-    e.returnValue = false;
-  }, []);
-
   useEffect(() => {
     const scrollUp = () => {
       upInterval = setInterval(() => (scrollUpImage.scrollTop -= 1), 20);
@@ -32,26 +24,17 @@ export const ProjectsShowcase = ({ data }) => {
       downInterval = setInterval(() => (scrollDownImage.scrollTop += 1), 15);
     };
 
-    const disableScroll = () => {
-      document.addEventListener("wheel", preventDefault, {
-        passive: false,
-      });
-    };
-
-    const enableScroll = (e) => {
-      document.removeEventListener("wheel", preventDefault, false);
-    };
-
     if (scrollUpImage) {
       scrollUp();
-      disableScroll();
     } else if (scrollDownImage) {
       scrollDown();
-      disableScroll();
-    } else {
-      enableScroll();
     }
   }, [scrollUpImage, scrollDownImage]);
+
+  window.addEventListener("scroll", () => {
+    clearInterval(upInterval);
+    clearInterval(downInterval);
+  });
 
   if (!data.projects) return;
   if (!(data?.projects.length > 0)) return;
@@ -108,19 +91,15 @@ export const ProjectsShowcase = ({ data }) => {
             key={idx}
             href={project?.customFieldsProjects?.projectUrl || "#"}
             target="_blank"
-            className="group flex hover:bg-accent-100/5 p-4 rounded -ml-4 mb-4"
+            className="group flex flex-col sm:flex-row lg:flex-col xl:flex-row hover:bg-accent-100/5 p-3 sm:p-4 rounded -ml-3 -mr-3 sm:-ml-4 sm:-mr-4 mb-4"
           >
-            <div className="relative shadow-xl w-2/5 h-[100%] p-1 rounded-md backdrop-blur-sm bg-accent-200/10 mt-1">
+            <div className="relative shadow-xl md:w-1/2 lg:w-full xl:w-2/5 h-[100%] p-1 rounded-md backdrop-blur-sm bg-accent-200/10 mb-4 xl:mt-1">
               <span
                 className="absolute top-0 left-0 w-full h-[40%]"
                 onMouseEnter={(e) => imageScrollUpHandler(e)}
                 onMouseLeave={(e) => stopScrollImage(e)}
               ></span>
-              <figure
-                className={`w-full aspect-video overflow-hidden rounded`}
-                // onMouseEnter={(e) => setHoveredImage(e.target.parentElement)}
-                // onMouseLeave={stopScrollImage}
-              >
+              <figure className={`w-full aspect-video overflow-hidden rounded`}>
                 <Image
                   src={project.featuredImage.node.sourceUrl}
                   width={450}
@@ -135,9 +114,9 @@ export const ProjectsShowcase = ({ data }) => {
                 onMouseLeave={() => stopScrollImage()}
               ></span>
             </div>
-            <div className="project-text w-3/5 pl-4">
+            <div className="project-text md:w-1/2 lg:w-full xl:w-3/5 sm:pl-4 lg:pl-0 xl:pl-4">
               <div className="flex group-hover:text-accent-200">
-                <h4 className="inline-block mb-2 text-lg font-medium">
+                <h4 className="inline-block mb-2 text-lg font-semibold">
                   {project.title}
                 </h4>
                 <span>

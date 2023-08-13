@@ -5,6 +5,7 @@ import { FormField } from "./FormField";
 import { useEffect, useState } from "react";
 import { getFormFields, submitFormFields } from "@/utils/formUtils";
 import { FieldError } from "./FieldError";
+import { Button } from "@/components/Button/Button";
 
 // const fetcher = (query) => request("http://localhost/portfolio/graphql", query);
 
@@ -13,6 +14,7 @@ export const Form = ({ gravityFormId }) => {
   const [fieldValues, setFieldValues] = useState([]); // for passing values when submitting form
   const [inputFields, setInputFields] = useState({}); // for updating values in dom
   const [errors, setErrors] = useState({});
+  const [focuses, setFocuses] = useState({});
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
@@ -26,15 +28,6 @@ export const Form = ({ gravityFormId }) => {
 
   const submitButtonText = formData?.data?.gfForm?.submitButton?.text;
   const formFields = formData?.data?.gfForm?.formFields?.nodes;
-
-  const initializeInputFields = (fields) => {
-    const inputs = {};
-    console.log(fields);
-    fields.map((field) => {
-      inputs[`form-field-${gravityFormId}-${field.id}`] = "";
-    });
-    setInputFields(inputs);
-  };
 
   const validateValues = (inputValues) => {
     let errors = {};
@@ -108,7 +101,6 @@ export const Form = ({ gravityFormId }) => {
 
     // updating field values in DOM
     setInputFields({ ...inputFields, [e.target.name]: e.target.value });
-    console.log(inputFields);
 
     validationTimeout = setTimeout(() => {
       setErrors(validateValues(inputFields));
@@ -130,44 +122,70 @@ export const Form = ({ gravityFormId }) => {
     if (Object.keys(errors).length === 0 && submitting) {
       finishSubmit();
     }
-  }, [errors]);
+  }, [submitting]);
 
-  return (
-    <>
-      {Object.keys(errors).length === 0 && submitting ? (
-        <span className="success">Successfully submitted ✓</span>
-      ) : null}
-      {formFields && formFields.length > 0 && (
-        <form id={gravityFormId} onSubmit={(e) => formSubmitHandler(e)}>
-          {formFields.map((field) => {
-            return (
-              <div key={field.id} className="text-black-200 relative focused">
-                <label className={`absolute top-[1.05rem] left-3`}>
-                  {field.label}
-                </label>
-                <FormField
-                  className={`bg-black-500 text-white-300 p-3 pt-5 rounded block w-full mb-5`}
-                  formId={gravityFormId}
-                  fieldAttr={field}
-                  value={
-                    inputFields[`form-field-${gravityFormId}-${field.id}`] || ""
-                  }
-                  onChange={fieldChangeHandler}
-                  // onBlur={fieldBlurHandler}
-                />
-                {errors[`form-field-${gravityFormId}-${field.id}`] ? (
-                  <p className="error">
-                    {errors[`form-field-${gravityFormId}-${field.id}`]}
-                  </p>
-                ) : null}
-              </div>
-            );
-          })}
-          <button onClick={(e) => formSubmitHandler(e)}>
-            {submitButtonText ? submitButtonText : "Send"}
-          </button>
-        </form>
-      )}
-    </>
-  );
+  const fieldBlurHandler = (e) => {
+    if (e.target.value === "") {
+      setFocuses({ ...focuses, [e.target.name]: false });
+    }
+    console.log(focuses);
+  };
+
+  const fieldFocusHandler = (e) => {
+    setFocuses({ ...focuses, [e.target.name]: true });
+    console.log(focuses);
+  };
+
+  if (formFields && formFields.length) {
+    return (
+      <>
+        {Object.keys(errors).length === 0 && submitting ? (
+          <span className="success">Successfully submitted ✓</span>
+        ) : (
+          <form id={gravityFormId} onSubmit={(e) => formSubmitHandler(e)}>
+            {formFields.map((field) => {
+              return (
+                <div
+                  key={field.id}
+                  className={`text-black-200 relative mb-6 ${
+                    focuses[`form-field-${gravityFormId}-${field.id}`] &&
+                    "focused"
+                  }`}
+                >
+                  <label
+                    className={`absolute top-[1.05rem] left-3 font-semibold text-white-200`}
+                  >
+                    {field.label}
+                  </label>
+                  <FormField
+                    className={`bg-black-300 text-white-300 p-3 pt-6 rounded block w-full`}
+                    formId={gravityFormId}
+                    fieldAttr={field}
+                    value={
+                      inputFields[`form-field-${gravityFormId}-${field.id}`] ||
+                      ""
+                    }
+                    onChange={fieldChangeHandler}
+                    onFocus={fieldFocusHandler}
+                    onBlur={fieldBlurHandler}
+                  />
+                  {errors[`form-field-${gravityFormId}-${field.id}`] ? (
+                    <p className="text-sm mt-2 text-red">
+                      {errors[`form-field-${gravityFormId}-${field.id}`]}
+                    </p>
+                  ) : null}
+                </div>
+              );
+            })}
+            <div className="">
+              <Button onClick={(e) => formSubmitHandler(e)}>
+                {submitButtonText ? submitButtonText : "Send"}
+              </Button>
+            </div>
+          </form>
+        )}
+      </>
+    );
+  }
+  return;
 };

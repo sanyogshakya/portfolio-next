@@ -3,23 +3,25 @@ import { TextareaField } from "@/components/FormFields/TextareaField";
 
 export const FormField = ({
   fieldAttr,
+  formId,
+  className,
   value,
   onChange,
   onBlur,
-  formId,
-  className,
+  onFocus,
 }) => {
   switch (fieldAttr.type) {
     case "EMAIL":
     case "TEXT": {
       return (
         <TextField
+          formId={formId}
           className={className}
           fieldAttr={fieldAttr}
           value={value}
           onChange={onChange}
           onBlur={onBlur}
-          formId={formId}
+          onFocus={onFocus}
         />
       );
     }
@@ -29,9 +31,10 @@ export const FormField = ({
           className={className}
           fieldAttr={fieldAttr}
           value={value}
+          formId={formId}
           onChange={onChange}
           onBlur={onBlur}
-          formId={formId}
+          onFocus={onFocus}
         />
       );
     }

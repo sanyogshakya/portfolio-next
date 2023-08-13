@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { relativeToAbsoluteUrls } from "@/utils/relativeToAbsoluteUrls";
+import { ExternalLink } from "../ExternalLink/ExternalLink";
 
 export const Experience = ({ data }) => {
   const experienceCount = data.experience_list || 0;
@@ -60,11 +61,7 @@ export const Experience = ({ data }) => {
           })}
         </ul>
       )}
-      {resume && (
-        <Link target="_blank" href={resume}>
-          View My Resume
-        </Link>
-      )}
+      {resume && <ExternalLink title="View My Resume" href={resume} />}
     </section>
   );
 };

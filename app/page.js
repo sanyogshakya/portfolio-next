@@ -5,6 +5,7 @@ import { getPageData } from "@/utils/getPageData";
 import { HeaderHome } from "@/components/HeaderHome";
 import { BlockRenderer } from "@/components/BlockRenderer";
 import { TwoColumnPageWrapper } from "@/components/TwoColumnPageWrapper";
+import { FooterHome } from "@/components/Footer/FooterHome";
 
 // If loading a variable font, you don't need to specify the font weight
 const manrope = Manrope({
@@ -26,16 +27,19 @@ export default async function Home() {
   const siteDescription = content.data.allSettings.generalSettingsDescription;
 
   return (
-    <div className="relative container mx-auto px-5 lg:px-16 xl:px-[10rem]">
+    <div className="relative container mx-auto px-5 md:px-16 xl:px-[10rem]">
       <TwoColumnPageWrapper>
         <HeaderHome
           themeSettings={themeSettings}
           siteTitle={siteTitle}
           siteDescription={siteDescription}
         />
-        <main className="flex-[1_1_80%] 2xl:flex-[1_1_58%]">
-          <BlockRenderer blocks={blocks} />
-        </main>
+        <div className="flex-[1_1_50%] 2xl:flex-[1_1_58%]">
+          <main>
+            <BlockRenderer blocks={blocks} />
+          </main>
+          <FooterHome />
+        </div>
       </TwoColumnPageWrapper>
     </div>
   );

@@ -1,10 +1,11 @@
 export const TextField = ({
   fieldAttr,
   value,
-  onChange,
-  onBlur,
   formId,
   className,
+  onChange,
+  onBlur,
+  onFocus,
 }) => {
   return (
     <input
@@ -13,9 +14,10 @@ export const TextField = ({
       id={fieldAttr.id}
       required={fieldAttr.isRequired}
       value={value}
+      className={className}
       onChange={onChange}
       onBlur={onBlur}
-      className={className}
+      onFocus={onFocus}
     />
   );
 };

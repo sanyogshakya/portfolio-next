@@ -70,7 +70,7 @@ export const HeaderHome = ({ themeSettings, siteTitle, siteDescription }) => {
   }, [activeSection]);
 
   return (
-    <header className="sticky top-0 py-8 max-h-[100vh] lg:py-16 flex-[1_1_20%] 2xl:flex-[1_1_42%]">
+    <header className="lg:sticky flex flex-col top-0 pt-4 md:pt-8 max-h-[100vh] lg:py-16 lg:flex-[1_1_50%] 2xl:flex-[1_1_42%]">
       <svg
         id="eWKYx0wajhn1"
         viewBox="0 0 512 532"
@@ -78,7 +78,7 @@ export const HeaderHome = ({ themeSettings, siteTitle, siteDescription }) => {
         textRendering="geometricPrecision"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
-        className={`mb-8`}
+        className={`mb-8 w-[60px] h-[60px] shrink-0`}
       >
         <defs id="defs26" />
         <text
@@ -105,34 +105,21 @@ export const HeaderHome = ({ themeSettings, siteTitle, siteDescription }) => {
           className={`stroke-accent-200`}
         />
       </svg>
-      {/* <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 115 97"
-          strokeWidth="4"
-          strokeLinejoin="round"
-          strokeLinecap="round"
-          width="53"
-          height="44"
-          className={`logo mb-8 stroke-accent-200 ${!loading && "animate"}`}
-        >
-          <path
-            d="m 69 27 c 7 -2 10 -24 -10 -24 c -13 0 -23 14 -10 28 l 40 40 l 22.5 -22.5 l -22.5 -22.5 l -62 45 l -22.5 -22.5 l 22.5 -22.5 l 40 40 c 11 10 6 28 -10 28 c -16 0 -19 -18 -10 -24"
-            fill="transparent"
-          ></path>
-        </svg> */}
       <h1
-        className={`${archivo.className} font-semibold text-4xl uppercase 2xl:text-5xl`}
+        className={`${archivo.className} font-semibold text-5xl uppercase 2xl:text-5xl`}
       >
         {siteTitle}
       </h1>
-      <h2 className={`mt-3 font-medium text-lg leading-normal 2xl:text-xl`}>
+      <h2
+        className={`mt-3 font-medium text-lg text-white-400 leading-normal 2xl:text-xl`}
+      >
         {siteDescription}
       </h2>
       <p className={`mt-4 leading-normal max-w-[300px]`}>
         {themeSettings.description}
       </p>
       {pageNavigation && (
-        <nav className={`home-nav mt-16`}>
+        <nav className={`home-nav mt-16 mb-8 hidden lg:block`}>
           <ul>
             {pageNavigation.map((navItem, index) => {
               const sectionId = navItem.sectionId;
@@ -159,7 +146,7 @@ export const HeaderHome = ({ themeSettings, siteTitle, siteDescription }) => {
           </ul>
         </nav>
       )}
-      <ul className="mt-16 flex gap-4">
+      <ul className="pt-8 mt-auto flex gap-4">
         <li>
           <Link
             href={socialHandles.github.link.url}
