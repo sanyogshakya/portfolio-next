@@ -7,7 +7,8 @@ import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { relativeToAbsoluteUrls } from "@/utils/relativeToAbsoluteUrls";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const fetcher = (query) => request("http://localhost/portfolio/graphql", query);
+const fetcher = (query) =>
+  request(process.env.NEXT_PUBLIC_WORDPRESS_API_URL, query);
 
 export const ProjectsShowcase = ({ data }) => {
   const [scrollUpImage, setScrollUpImage] = useState(null);

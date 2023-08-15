@@ -1,5 +1,5 @@
 export const getPageData = async () => {
-  const res = await fetch("http://localhost/portfolio/graphql", {
+  const res = await fetch(process.env.NEXT_PUBLIC_WORDPRESS_API_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

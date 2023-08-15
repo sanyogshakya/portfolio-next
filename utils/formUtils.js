@@ -1,5 +1,5 @@
 export const getFormFields = async (gravityFormId) => {
-  const res = await fetch("http://localhost/portfolio/graphql", {
+  const res = await fetch(process.env.NEXT_PUBLIC_WORDPRESS_API_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -59,7 +59,7 @@ export const submitFormFields = async (fieldValues) => {
     .replace(/"([^"]+)":/g, "$1:")
     .replace(/\uFFFF/g, '\\"');
   console.log(jsonFieldValues);
-  const res = await fetch("http://localhost/portfolio/graphql", {
+  const res = await fetch(process.env.NEXT_PUBLIC_WORDPRESS_API_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
