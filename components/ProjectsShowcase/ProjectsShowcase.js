@@ -40,9 +40,9 @@ export const ProjectsShowcase = ({ data }) => {
   if (!data.projects) return;
   if (!(data?.projects.length > 0)) return;
 
-  const projectIdString = data.projects.toString();
+  const projectIdString = data?.projects?.toString() || "";
 
-  const { data: projectsData, error } = useSWR(
+  const { data: projectsData } = useSWR(
     `{
       projects(where: { in: [${projectIdString}] }) {
         nodes {

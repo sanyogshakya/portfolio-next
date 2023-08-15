@@ -24,7 +24,7 @@ export const Form = ({ gravityFormId }) => {
       // initializeInputFields(result.data.gfForm.formFields.nodes);
     };
     getContactForm(gravityFormId);
-  }, []);
+  }, [gravityFormId]);
 
   const submitButtonText = formData?.data?.gfForm?.submitButton?.text;
   const formFields = formData?.data?.gfForm?.formFields?.nodes;
@@ -113,12 +113,11 @@ export const Form = ({ gravityFormId }) => {
     setSubmitting(true);
   };
 
-  const finishSubmit = async () => {
-    const submitResponse = await submitFormFields(fieldValues);
-    console.log(submitResponse);
-  };
-
   useEffect(() => {
+    const finishSubmit = async () => {
+      const submitResponse = await submitFormFields(fieldValues);
+      console.log(submitResponse);
+    };
     if (Object.keys(errors).length === 0 && submitting) {
       finishSubmit();
     }
