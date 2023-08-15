@@ -37,9 +37,6 @@ export const ProjectsShowcase = ({ data }) => {
     clearInterval(downInterval);
   });
 
-  if (!data.projects) return;
-  if (!(data?.projects.length > 0)) return;
-
   const projectIdString = data?.projects?.toString() || "";
 
   const { data: projectsData } = useSWR(
