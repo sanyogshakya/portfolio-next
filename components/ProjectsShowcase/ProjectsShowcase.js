@@ -17,6 +17,13 @@ export const ProjectsShowcase = ({ data }) => {
   let upInterval, downInterval;
 
   useEffect(() => {
+    window.addEventListener("scroll", () => {
+      clearInterval(upInterval);
+      clearInterval(downInterval);
+    });
+  }, []);
+
+  useEffect(() => {
     const scrollUp = () => {
       upInterval = setInterval(() => (scrollUpImage.scrollTop -= 1), 20);
     };
@@ -31,11 +38,6 @@ export const ProjectsShowcase = ({ data }) => {
       scrollDown();
     }
   }, [scrollUpImage, scrollDownImage]);
-
-  window.addEventListener("scroll", () => {
-    clearInterval(upInterval);
-    clearInterval(downInterval);
-  });
 
   const projectIdString = data?.projects?.toString() || "";
 
