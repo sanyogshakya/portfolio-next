@@ -48,9 +48,9 @@ export const Experience = ({ data }) => {
                       </div>
                     );
                   })}
-                <h6 className="text-sm text-white-500 font-medium mb-3 mt-2">
+                <h5 className="text-sm text-white-500 font-medium mb-3 mt-2">
                   {data[jobDuration]}
-                </h6>
+                </h5>
                 <div
                   dangerouslySetInnerHTML={{
                     __html: relativeToAbsoluteUrls(data[jobDescription]),
