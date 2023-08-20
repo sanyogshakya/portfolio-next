@@ -17,31 +17,38 @@ module.exports = {
         22: "5.5rem",
         24: "6rem",
       },
-    },
-    colors: {
-      transparent: "transparent",
-      current: "currentColor",
-      black: {
-        100: "#1d1c1d",
-        200: "#2a292a",
-        300: "#3B3A3B",
-        400: "#424142",
-        500: "#545354",
-        600: "#6c6b6c",
-        700: "#7a797a",
+      colors: {
+        transparent: "transparent",
+        current: "currentColor",
+        black: {
+          100: "#1d1c1d",
+          200: "#2a292a",
+          300: "#3B3A3B",
+          400: "#424142",
+          500: "#545354",
+          600: "#6c6b6c",
+          700: "#7a797a",
+        },
+        white: {
+          100: "#eae9ff",
+          200: "#dcdbef",
+          300: "#bcbbcf",
+          400: "#abaabf",
+          500: "#9a99af",
+        },
+        accent: {
+          100: "#00bdf9",
+          200: "#00acff",
+        },
       },
-      white: {
-        100: "#eae9ff",
-        200: "#dcdbef",
-        300: "#bcbbcf",
-        400: "#abaabf",
-        500: "#9a99af",
+      keyframes: {
+        dash: {
+          to: { "stroke-dashoffset": 0 },
+        },
       },
-      accent: {
-        100: "#00bdf9",
-        200: "#00acff",
+      animation: {
+        dash: "dash 5s linear 10s forwards",
       },
-      red: "#d22b2b",
     },
   },
   plugins: [],

@@ -1,27 +1,34 @@
 "use client";
-import useSWR from "swr";
-import { request } from "graphql-request";
 import Image from "next/image";
 import Link from "next/link";
 import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { relativeToAbsoluteUrls } from "@/utils/relativeToAbsoluteUrls";
-import { useCallback, useEffect, useRef, useState } from "react";
-
-const fetcher = (query) =>
-  request(process.env.NEXT_PUBLIC_WORDPRESS_API_URL, query);
+import { getProjectShowcaseData } from "@/utils/getProjectData";
+import { useState, useEffect } from "react";
 
 export const ProjectsShowcase = ({ data }) => {
   const [scrollUpImage, setScrollUpImage] = useState(null);
   const [scrollDownImage, setScrollDownImage] = useState(null);
+  const [projectIdString, setProjectIdString] = useState("");
+  const [projects, setProjects] = useState([]);
 
   let upInterval, downInterval;
 
   useEffect(() => {
+    setProjectIdString(data?.projects?.toString());
     window.addEventListener("scroll", () => {
       clearInterval(upInterval);
       clearInterval(downInterval);
     });
   }, []);
+
+  useEffect(() => {
+    const getProjectData = async (projectIdString) => {
+      const result = await getProjectShowcaseData(projectIdString);
+      setProjects(result?.data?.projects?.nodes);
+    };
+    if (projectIdString) getProjectData(projectIdString);
+  }, [projectIdString]);
 
   useEffect(() => {
     const scrollUp = () => {
@@ -38,34 +45,6 @@ export const ProjectsShowcase = ({ data }) => {
       scrollDown();
     }
   }, [scrollUpImage, scrollDownImage]);
-
-  const projectIdString = data?.projects?.toString() || "";
-
-  const { data: projectsData } = useSWR(
-    `{
-      projects(where: { in: [${projectIdString}] }) {
-        nodes {
-          title
-          excerpt
-          featuredImage {
-            node {
-              title
-              sourceUrl
-            }
-          }
-          customFieldsProjects {
-            projectUrl
-            technologies {
-              technology
-            }
-          }
-        }
-      }
-    }`,
-    fetcher
-  );
-
-  const projects = projectsData?.projects?.nodes;
 
   const imageScrollUpHandler = (e) => {
     setScrollUpImage(e.target.parentElement.querySelector("figure"));
