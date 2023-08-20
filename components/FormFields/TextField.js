@@ -6,6 +6,8 @@ export const TextField = ({
   onChange,
   onBlur,
   onFocus,
+  id,
+  name,
 }) => {
   return (
     <input

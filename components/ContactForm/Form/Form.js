@@ -171,15 +171,16 @@ export const Form = ({ gravityFormId }) => {
           onSubmit={(e) => formSubmitHandler(e)}
         >
           {formFields.map((field) => {
+            const name = `form-field-${gravityFormId}-${field.id}`;
             return (
               <div
                 key={field.id}
                 className={`text-black-200 relative mb-6 ${
-                  focuses[`form-field-${gravityFormId}-${field.id}`] &&
-                  "focused"
+                  focuses[name] && "focused"
                 }`}
               >
                 <label
+                  htmlFor={name}
                   className={`absolute top-[1.05rem] left-3 font-semibold text-white-200`}
                 >
                   {field.label}
@@ -188,16 +189,16 @@ export const Form = ({ gravityFormId }) => {
                   className={`bg-black-300 text-white-300 p-3 pt-6 rounded block w-full`}
                   formId={gravityFormId}
                   fieldAttr={field}
-                  value={
-                    inputFields[`form-field-${gravityFormId}-${field.id}`] || ""
-                  }
+                  id={name}
+                  name={name}
+                  value={inputFields[name] || ""}
                   onChange={fieldChangeHandler}
                   onFocus={fieldFocusHandler}
                   onBlur={fieldBlurHandler}
                 />
-                {errors[`form-field-${gravityFormId}-${field.id}`] ? (
+                {errors[name] ? (
                   <p className="text-sm mt-2 font-medium text-red-600">
-                    {errors[`form-field-${gravityFormId}-${field.id}`]}
+                    {errors[name]}
                   </p>
                 ) : null}
               </div>

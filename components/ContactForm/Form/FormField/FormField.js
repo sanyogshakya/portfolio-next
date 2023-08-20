@@ -9,6 +9,8 @@ export const FormField = ({
   onChange,
   onBlur,
   onFocus,
+  id,
+  name,
 }) => {
   switch (fieldAttr.type) {
     case "EMAIL":
@@ -22,6 +24,8 @@ export const FormField = ({
           onChange={onChange}
           onBlur={onBlur}
           onFocus={onFocus}
+          id={id}
+          name={name}
         />
       );
     }
@@ -35,6 +39,8 @@ export const FormField = ({
           onChange={onChange}
           onBlur={onBlur}
           onFocus={onFocus}
+          id={id}
+          name={name}
         />
       );
     }

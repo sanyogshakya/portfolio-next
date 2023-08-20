@@ -6,17 +6,19 @@ export const TextareaField = ({
   onChange,
   onBlur,
   onFocus,
+  id,
+  name,
 }) => {
   return (
     <textarea
       className={`${className} h-[150px]`}
-      id={fieldAttr.id}
-      name={`form-field-${formId}-${fieldAttr.id}`}
       required={fieldAttr.isRequired}
       value={value}
       onChange={onChange}
       onBlur={onBlur}
       onFocus={onFocus}
+      id={id}
+      name={name}
     />
   );
 };
