@@ -187,7 +187,6 @@ export const Form = ({ gravityFormId }) => {
                 </label>
                 <FormField
                   className={`bg-black-300 text-white-300 p-3 pt-6 rounded block w-full`}
-                  formId={gravityFormId}
                   fieldAttr={field}
                   id={name}
                   name={name}

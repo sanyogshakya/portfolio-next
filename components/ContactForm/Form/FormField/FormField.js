@@ -3,7 +3,6 @@ import { TextareaField } from "@/components/FormFields/TextareaField";
 
 export const FormField = ({
   fieldAttr,
-  formId,
   className,
   value,
   onChange,
@@ -17,7 +16,6 @@ export const FormField = ({
     case "TEXT": {
       return (
         <TextField
-          formId={formId}
           className={className}
           fieldAttr={fieldAttr}
           value={value}

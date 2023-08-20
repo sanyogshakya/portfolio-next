@@ -1,7 +1,6 @@
 export const TextField = ({
   fieldAttr,
   value,
-  formId,
   className,
   onChange,
   onBlur,
@@ -12,8 +11,8 @@ export const TextField = ({
   return (
     <input
       type={fieldAttr.type.toLowerCase()}
-      name={`form-field-${formId}-${fieldAttr.id}`}
-      id={fieldAttr.id}
+      name={name}
+      id={id}
       required={fieldAttr.isRequired}
       value={value}
       className={className}
