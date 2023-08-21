@@ -5,6 +5,7 @@ import { FaArrowUpRightFromSquare } from "react-icons/fa6";
 import { relativeToAbsoluteUrls } from "@/utils/relativeToAbsoluteUrls";
 import { getProjectShowcaseData } from "@/utils/getProjectData";
 import { useState, useEffect } from "react";
+import { Section } from "../Section/Section";
 
 export const ProjectsShowcase = ({ data }) => {
   const [scrollUpImage, setScrollUpImage] = useState(null);
@@ -62,8 +63,8 @@ export const ProjectsShowcase = ({ data }) => {
   };
 
   return (
-    <section id="projects" className={`section pt-8 lg:pt-16`}>
-      <h3 className="mt-3 mb-6 text-4xl font-bold">{data.title}</h3>
+    <Section id={data.section_id}>
+      <h3 className="mt-3 mb-8 text-4xl font-bold">{data.title}</h3>
       {projects &&
         projects.map((project, idx) => (
           <Link
@@ -81,8 +82,8 @@ export const ProjectsShowcase = ({ data }) => {
               <figure className={`w-full aspect-video overflow-hidden rounded`}>
                 <Image
                   src={project.featuredImage.node.sourceUrl}
-                  width={450}
-                  height={300}
+                  width={375}
+                  height={1545}
                   alt={project.featuredImage.node.title}
                   className={`w-full object-cover`}
                 ></Image>
@@ -125,6 +126,6 @@ export const ProjectsShowcase = ({ data }) => {
             </div>
           </Link>
         ))}
-    </section>
+    </Section>
   );
 };

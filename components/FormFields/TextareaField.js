@@ -6,6 +6,7 @@ export const TextareaField = ({
   onBlur,
   onFocus,
   id,
+  dataId,
   name,
 }) => {
   return (
@@ -17,6 +18,7 @@ export const TextareaField = ({
       onBlur={onBlur}
       onFocus={onFocus}
       id={id}
+      data-id={dataId}
       name={name}
     />
   );

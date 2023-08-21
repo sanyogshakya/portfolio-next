@@ -6,6 +6,7 @@ export const TextField = ({
   onBlur,
   onFocus,
   id,
+  dataId,
   name,
 }) => {
   return (
@@ -13,6 +14,7 @@ export const TextField = ({
       type={fieldAttr.type.toLowerCase()}
       name={name}
       id={id}
+      data-id={dataId}
       required={fieldAttr.isRequired}
       value={value}
       className={className}

@@ -18,6 +18,7 @@ export const Form = ({ gravityFormId }) => {
   const [submitting, setSubmitting] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitFailed, setSubmitFailed] = useState(false);
 
   useEffect(() => {
     const getContactForm = async (formId) => {
@@ -68,12 +69,12 @@ export const Form = ({ gravityFormId }) => {
   };
 
   let validationTimeout;
+
   function fieldChangeHandler(e) {
-    setSubmitted((current) => {
-      current && !current;
-    });
+    setSubmitted(false);
+    setSubmitFailed(false);
     if (typeof validationTimeout === "number") clearTimeout(validationTimeout);
-    const fieldId = e.target.id;
+    const fieldId = e.target.getAttribute("data-id");
     const fieldValue = e.target.value;
     const fieldType = e.target.type;
 
@@ -127,6 +128,10 @@ export const Form = ({ gravityFormId }) => {
   useEffect(() => {
     const finishSubmit = async () => {
       const submitResponse = await submitFormFields(fieldValues);
+      if (submitResponse?.data?.errors) {
+        setSubmitFailed(true);
+        setSubmitting(false);
+      }
       if (submitResponse?.data?.submitGfForm?.errors) {
         setErrors(
           validateValues(inputFields, submitResponse.data.submitGfForm.errors)
@@ -138,7 +143,7 @@ export const Form = ({ gravityFormId }) => {
         setInputFields({});
         setSubmitting(false);
         setFocuses({});
-        setFieldValues({});
+        setFieldValues([]);
         setErrors({});
       }
     };
@@ -189,6 +194,7 @@ export const Form = ({ gravityFormId }) => {
                   className={`bg-black-300 text-white-300 p-3 pt-6 rounded block w-full`}
                   fieldAttr={field}
                   id={name}
+                  dataId={field.id}
                   name={name}
                   value={inputFields[name] || ""}
                   onChange={fieldChangeHandler}
@@ -255,13 +261,33 @@ export const Form = ({ gravityFormId }) => {
                 />
               </svg>
             )}
+            {submitFailed && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 48 48"
+                width="40px"
+                height="40px"
+              >
+                <path
+                  className={`stroke-red-600 fill-none animate-[dash_1s_linear_forwards]`}
+                  strokeDasharray={100}
+                  strokeDashoffset={100}
+                  strokeWidth={1}
+                  d="M21.5 4.5H26.501V43.5H21.5z"
+                  transform="rotate(45.001 24 24)"
+                />
+                <path
+                  className={`stroke-red-600 fill-none animate-[dash_1s_linear_forwards]`}
+                  strokeDasharray={100}
+                  strokeDashoffset={100}
+                  strokeWidth={1}
+                  d="M21.5 4.5H26.5V43.501H21.5z"
+                  transform="rotate(135.008 24 24)"
+                />
+              </svg>
+            )}
           </div>
         </form>
-        {submitted && (
-          <div className="mt-4 text-green-500 font-bold text-lg tracking-wider">
-            Successfully submitted ✓
-          </div>
-        )}
         {/* )} */}
       </>
     );

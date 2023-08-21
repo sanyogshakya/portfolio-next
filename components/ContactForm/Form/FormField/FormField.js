@@ -9,6 +9,7 @@ export const FormField = ({
   onBlur,
   onFocus,
   id,
+  dataId,
   name,
 }) => {
   switch (fieldAttr.type) {
@@ -23,6 +24,7 @@ export const FormField = ({
           onBlur={onBlur}
           onFocus={onFocus}
           id={id}
+          dataId={dataId}
           name={name}
         />
       );
@@ -37,6 +39,7 @@ export const FormField = ({
           onBlur={onBlur}
           onFocus={onFocus}
           id={id}
+          dataId={dataId}
           name={name}
         />
       );

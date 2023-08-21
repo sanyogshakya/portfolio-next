@@ -4,6 +4,9 @@ export const getFormFields = async (gravityFormId) => {
     headers: {
       "Content-Type": "application/json",
     },
+    next: {
+      revalidate: 60,
+    },
     body: JSON.stringify({
       query: `query gformFieldQuery{
         gfForm(id: "${gravityFormId}") {
@@ -44,6 +47,7 @@ export const submitFormFields = async (fieldValues) => {
   jsonFieldValues = jsonFieldValues
     .replace(/"([^"]+)":/g, "$1:")
     .replace(/\uFFFF/g, '\\"');
+  console.log(jsonFieldValues);
   const res = await fetch(process.env.NEXT_PUBLIC_WORDPRESS_API_URL, {
     method: "POST",
     headers: {

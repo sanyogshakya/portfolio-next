@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { relativeToAbsoluteUrls } from "@/utils/relativeToAbsoluteUrls";
 import { ExternalLink } from "../ExternalLink/ExternalLink";
+import { Section } from "../Section/Section";
 
 export const Experience = ({ data }) => {
   const experienceCount = data.experience_list || 0;
@@ -8,8 +9,8 @@ export const Experience = ({ data }) => {
   const repeaterSlug = "experience_list";
   const resume = data.resume?.url;
   return (
-    <section id={data.section_id} className={`section pt-8 lg:pt-16`}>
-      <h3 className="mt-3 mb-10 text-4xl font-bold">{data.title}</h3>
+    <Section id={data.section_id}>
+      <h3 className="mt-3 mb-8 lg:mb-10 text-4xl font-bold">{data.title}</h3>
       {experienceCount > 0 && (
         <ul className="experience-list">
           {experienceIdxArray.map((_, index) => {
@@ -62,6 +63,6 @@ export const Experience = ({ data }) => {
         </ul>
       )}
       {resume && <ExternalLink title="View My Resume" href={resume} />}
-    </section>
+    </Section>
   );
 };

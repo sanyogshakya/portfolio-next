@@ -4,6 +4,9 @@ export const getProjectShowcaseData = async (projectIdString) => {
     headers: {
       "Content-Type": "application/json",
     },
+    next: {
+      revalidate: 60,
+    },
     body: JSON.stringify({
       query: `query getPageData {
     projects(where: { in: [${projectIdString}] }) {
