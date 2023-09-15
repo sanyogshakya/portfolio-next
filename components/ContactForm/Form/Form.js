@@ -1,13 +1,8 @@
 "use client";
-// import useSWR from "swr";
-// import { request } from "graphql-request";
 import { FormField } from "./FormField";
 import { useEffect, useState } from "react";
 import { getFormFields, submitFormFields } from "@/utils/formUtils";
-import { FieldError } from "./FieldError";
 import { Button } from "@/components/Button/Button";
-
-// const fetcher = (query) => request("http://localhost/portfolio/graphql", query);
 
 export const Form = ({ gravityFormId }) => {
   const [formData, setFormData] = useState({});
@@ -24,7 +19,6 @@ export const Form = ({ gravityFormId }) => {
     const getContactForm = async (formId) => {
       const result = await getFormFields(formId);
       setFormData(result);
-      // initializeInputFields(result.data.gfForm.formFields.nodes);
     };
     getContactForm(gravityFormId);
   }, [gravityFormId]);
