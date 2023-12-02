@@ -4,6 +4,7 @@ import { TitleWithDescription } from "../TitleWithDescription";
 import { Experience } from "../Experience";
 import { ProjectsShowcase } from "../ProjectsShowcase";
 import { ContactForm } from "../ContactForm";
+import { ProjectListing } from "../ProjectListing";
 
 export const BlockRenderer = ({ blocks }) => {
   return blocks.map((block) => {
@@ -40,6 +41,9 @@ export const BlockRenderer = ({ blocks }) => {
       }
       case "acf/sanyog-contact-form": {
         return <ContactForm key={block.id} data={block.attributes.data} />;
+      }
+      case "acf/sanyog-project-listing": {
+        return <ProjectListing key={block.id} data={block.attributes.data} />;
       }
       default: {
         console.log("UNKNOWN: ", block);

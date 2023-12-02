@@ -20,14 +20,20 @@ const archivo = Archivo({
 
 export default async function Home() {
   const content = await getPageData();
+  const uncleanBlocks = content?.data?.nodeByUri?.blocks;
 
-  const blocks = cleanAndTransformBlocks(content.data.nodeByUri.blocks);
-  const themeSettings = content.data.themeSettings.themeSettings;
-  const siteTitle = content.data.allSettings.generalSettingsTitle;
-  const siteDescription = content.data.allSettings.generalSettingsDescription;
+  if (!uncleanBlocks) {
+    return notFound();
+  }
+
+  const blocks = cleanAndTransformBlocks(uncleanBlocks);
+  const themeSettings = content?.data?.themeSettings?.themeSettings;
+  const siteTitle = content?.data?.allSettings?.generalSettingsTitle;
+  const siteDescription =
+    content?.data?.allSettings?.generalSettingsDescription;
 
   return (
-    <div className="relative container mx-auto px-5 md:px-16 xl:px-[10rem]">
+    <div className="relative container mx-auto px-5 md:px-16">
       <TwoColumnPageWrapper>
         <HeaderHome
           themeSettings={themeSettings}

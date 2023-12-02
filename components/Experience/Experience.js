@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { relativeToAbsoluteUrls } from "@/utils/relativeToAbsoluteUrls";
-import { ExternalLink } from "../ExternalLink/ExternalLink";
 import { Section } from "../Section/Section";
+import { ExternalLink } from "../Link/ExternalLink/ExternalLink";
 
 export const Experience = ({ data }) => {
   const experienceCount = data.experience_list || 0;

@@ -5,7 +5,7 @@ export const ExternalLink = ({ href, title }) => {
     <Link
       href={href}
       target="_blank"
-      className={`inline-flex text-accent-200 group`}
+      className={`inline-flex text-white-300 hover:text-accent-200 group`}
     >
       <span className="inline-block mt-[0.28rem] text-md font-bold">
         {title}

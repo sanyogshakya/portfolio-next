@@ -56,7 +56,7 @@ export const Project = ({ project, idx }) => {
       target="_blank"
       className="group flex flex-col sm:flex-row lg:flex-col xl:flex-row hover:bg-accent-100/5 p-3 sm:p-4 rounded -ml-3 -mr-3 sm:-ml-4 sm:-mr-4 mb-4"
     >
-      <div className="relative shadow-xl md:w-1/2 lg:w-full xl:w-2/5 h-[100%] p-1 rounded-md backdrop-blur-sm bg-accent-200/10 mb-4 xl:mt-1">
+      <div className="relative shadow-xl md:w-1/2 lg:w-full xl:w-1/2 h-[100%] p-1 rounded-md backdrop-blur-sm bg-accent-200/10 mb-4 xl:mt-1">
         <span
           className="absolute top-0 left-0 w-full h-[40%]"
           onMouseEnter={(e) => imageScrollUpHandler(e)}
@@ -77,7 +77,7 @@ export const Project = ({ project, idx }) => {
           onMouseLeave={() => stopScrollImage()}
         ></span>
       </div>
-      <div className="project-text md:w-1/2 lg:w-full xl:w-3/5 sm:pl-4 lg:pl-0 xl:pl-4">
+      <div className="project-text md:w-1/2 lg:w-full xl:w-1/2 sm:pl-4 lg:pl-0 xl:pl-4">
         <div className="flex group-hover:text-accent-200">
           <h4 className="inline-block mb-2 text-lg font-semibold">
             {project.title}

@@ -1,4 +1,5 @@
-export const getPageData = async () => {
+export const getPageData = async (pageSlug = "/") => {
+  const slug = pageSlug;
   const res = await fetch(process.env.NEXT_PUBLIC_WORDPRESS_API_URL, {
     method: "POST",
     headers: {
@@ -9,7 +10,7 @@ export const getPageData = async () => {
     },
     body: JSON.stringify({
       query: `query getPageData {
-        nodeByUri(uri: "/") {
+        nodeByUri(uri: "${slug}") {
           ... on Page {
             blocks
           }

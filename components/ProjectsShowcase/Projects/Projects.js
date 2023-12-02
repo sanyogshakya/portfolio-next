@@ -1,4 +1,4 @@
-import { getProjectShowcaseData } from "@/utils/getProjectData";
+import { getProjectShowcaseData } from "@/utils/getProjectsShowcaseData";
 import { Project } from "./Project/Project";
 
 export const Projects = async ({ projectIdsString }) => {

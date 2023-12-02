@@ -2,6 +2,8 @@ import { Suspense } from "react";
 import { Section } from "../Section/Section";
 import { Projects } from "./Projects/Projects";
 import { ProjectsFallback } from "./Projects/ProjectsFallback";
+import Link from "next/link";
+import { ForwardLink } from "../Link/ForwardLink/ForwardLink";
 
 export const ProjectsShowcase = ({ data }) => {
   const projectIdsString = data?.projects?.toString();
@@ -12,6 +14,7 @@ export const ProjectsShowcase = ({ data }) => {
       <Suspense fallback={<ProjectsFallback />}>
         <Projects projectIdsString={projectIdsString} />
       </Suspense>
+      <ForwardLink href="/projects" title="View All Projects" />
     </Section>
   );
 };

@@ -8,7 +8,7 @@ export const getProjectShowcaseData = async (projectIdString) => {
       revalidate: 60,
     },
     body: JSON.stringify({
-      query: `query getPageData {
+      query: `query getProjectsShowcaseData {
     projects(where: { in: [${projectIdString}] }) {
       nodes {
         title
